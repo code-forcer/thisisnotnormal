@@ -1,0 +1,166 @@
+import localFont from "next/font/local";
+import "./globals.css";
+
+/* ------------------------------
+   Fonts
+-------------------------------- */
+const oxProto = localFont({
+  src: [
+    {
+      path: "../fonts/0xProto/0xProtoNerdFont-Regular.ttf",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../fonts/0xProto/0xProtoNerdFont-Italic.ttf",
+      weight: "400",
+      style: "italic",
+    },
+    {
+      path: "../fonts/0xProto/0xProtoNerdFont-Bold.ttf",
+      weight: "700",
+      style: "normal",
+    },
+  ],
+  variable: "--font-oxproto",
+  display: "swap",
+});
+/* ------------------------------
+   Viewport (REQUIRED SEPARATE EXPORT)
+-------------------------------- */
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  userScalable: true,
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#0a0a0a" },
+  ],
+};
+/* ------------------------------
+   Metadata
+-------------------------------- */
+export const metadata = {
+  title: {
+    default: "Enough! — Live Polling & Real-Time Voting Platform",
+    template: "%s | Enough!",
+  },
+
+  description:
+    "Enough! is a real-time polling and voting platform for live polls, instant results, interactive charts, and data-driven public engagement across web and mobile.",
+
+  keywords: [
+    "live polling platform",
+    "real-time polls",
+    "online voting system",
+    "interactive polls",
+    "instant poll results",
+    "public opinion polling",
+    "live voting",
+    "poll analytics",
+    "poll dashboard",
+    "real-time data visualization",
+  ],
+
+  authors: [{ name: "DevPete (Codeforcer)" }],
+  creator: "DevPete (Codeforcer)",
+  publisher: "Enough!",
+
+  applicationName: "Enough!",
+  generator: "Next.js",
+  referrer: "origin-when-cross-origin",
+
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://enoughcorruption.org",
+    siteName: "Enough!",
+    title: "Enough! — Real-Time Polling & Live Voting Platform",
+    description:
+      "Create, share, and track live polls with instant results, charts, and real-time audience engagement.",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Enough! Live Polling Platform",
+      },
+    ],
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "Enough! — Live Polling & Real-Time Results",
+    description:
+      "Run live polls, watch results update instantly, and engage audiences in real time.",
+    creator: "@enough",
+    images: ["/twitter-image.png"],
+  },
+
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+
+  icons: {
+    icon: [
+      { url: "/favicon.ico" },
+      { url: "/icon-16x16.png", sizes: "16x16", type: "image/png" },
+      { url: "/icon-32x32.png", sizes: "32x32", type: "image/png" },
+    ],
+    apple: [
+      {
+        url: "/apple-touch-icon.png",
+        sizes: "180x180",
+        type: "image/png",
+      },
+    ],
+    other: [
+      {
+        rel: "mask-icon",
+        url: "/safari-pinned-tab.svg",
+        color: "#0a0a0a",
+      },
+    ],
+  },
+
+  manifest: "/site.webmanifest",
+
+  category: "technology",
+};
+
+export default function RootLayout({ children }) {
+  return (
+    <html lang="en" className={oxProto.variable}>
+      <head>
+        {/* Windows Tiles */}
+        <meta name="msapplication-TileColor" content="#000000" />
+        <meta name="msapplication-config" content="/browserconfig.xml" />
+
+        {/* PWA */}
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        <meta name="apple-mobile-web-app-title" content="Enough!" />
+
+        {/* SEO */}
+        <link rel="canonical" href="https://enoughcorruption.org" />
+      </head>
+      <body className="antialiased">{children}</body>
+    </html>
+  );
+}

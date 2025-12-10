@@ -58,7 +58,7 @@ const Homepage = () => {
                 </div>
                 <div>
                   <h1 className="text-lg sm:text-2xl font-black tracking-tight">ENOUGH!</h1>
-                  <p className="text-xs text-blue-300 hidden sm:block">Real-Time Polling Platform</p>
+                  <p className="text-xs text-blue-300 hidden sm:block">Outrage, crowdsourced Platform</p>
                 </div>
               </div>
               <div className="flex items-center gap-2 sm:gap-3">

@@ -18,13 +18,15 @@ export const viewport = {
    Metadata
 -------------------------------- */
 export const metadata = {
+   metadataBase: new URL("http://localhost:3000"),
+   
   title: {
     default: "Enough! — Live Polling & Real-Time Voting Platform",
     template: "%s | Enough!",
   },
 
   description:
-    "Enough! is a real-time polling and voting platform for live polls, instant results, interactive charts, and data-driven public engagement across web and mobile.",
+    "Enough! is a Outrage, crowdsourced and voting platform for live polls, instant results, interactive charts, and data-driven public engagement across web and mobile.",
 
   keywords: [
     "live polling platform",
@@ -32,7 +34,7 @@ export const metadata = {
     "online voting system",
     "interactive polls",
     "instant poll results",
-    "public opinion polling",
+    "public Outrage, crowdsourced",
     "live voting",
     "poll analytics",
     "poll dashboard",
@@ -58,7 +60,7 @@ export const metadata = {
     locale: "en_US",
     url: "https://enoughcorruption.org",
     siteName: "Enough!",
-    title: "Enough! — Real-Time Polling & Live Voting Platform",
+    title: "Enough! — Outrage, crowdsourced & Live Voting Platform",
     description:
       "Create, share, and track live polls with instant results, charts, and real-time audience engagement.",
     images: [
@@ -136,7 +138,9 @@ export default function RootLayout({ children }) {
         {/* SEO */}
         <link rel="canonical" href="https://enoughcorruption.org" />
       </head>
-      <body className="antialiased">{children}</body>
+      <body className="antialiased">
+        {children}
+        </body>
     </html>
   );
 }

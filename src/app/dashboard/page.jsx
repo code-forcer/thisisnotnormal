@@ -32,6 +32,12 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
+import {
+  FaUserShield
+} from "react-icons/fa";
+import ContactsManagement from "@/components/ContactManagement";
+
+import { usePathname } from "next/navigation";
 const UnifiedDashboard = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
@@ -47,6 +53,8 @@ const UnifiedDashboard = () => {
   const [newQuestionText, setNewQuestionText] = useState("");
   const voteData = dashboardData?.voteData || {};
   const [isClient, setIsClient] = useState(false);
+  const [user, setUser] = useState(null);
+  const pathname = usePathname();
 
   //polls change
   // ========= STATE FOR NEXT / PREVIOUS POLL =========
@@ -61,7 +69,22 @@ const UnifiedDashboard = () => {
       setTimeout(() => setAnimating(false), 200);
     }, 200);
   };
+  useEffect(() => {
+    // Check if user is logged in
+    if (typeof window !== "undefined") {
+      const token = localStorage.getItem("token");
+      const userData = localStorage.getItem("user");
 
+      if (token && userData) {
+        try {
+          setUser(JSON.parse(userData));
+        } catch (error) {
+          console.error("Failed to parse user data:", error);
+        }
+      }
+    }
+  }, []);
+  const isAdmin = user?.role === "admin";
   // ========= NEXT POLL =========
   const nextPoll = () => {
     if (!allQuestions || allQuestions.length === 0) return;
@@ -360,8 +383,18 @@ const UnifiedDashboard = () => {
     { icon: TrendingUp, label: "Results", section: "results" },
     { icon: FileText, label: "Backend Stats", section: "backend" },
     { icon: Settings, label: "Admin", section: "admin" },
+    { icon: FaUserShield, label: "Contact Management", section: "contacts" },
+
   ];
-  // customs
+  // Add admin-only navigation items if user is admin
+  if (isAdmin) {
+    navItems.push({
+      icon: Users,
+      label: "Manage Contacts",
+      section: "contacts",
+      adminOnly: true
+    });
+  }
   // Chart colors
   const COLORS = [
     "#EF4444",
@@ -486,11 +519,11 @@ const UnifiedDashboard = () => {
                 <div className="flex items-center justify-center bg-gradient-to-br from-blue-500 to-blue-700 rounded-xl w-10 h-10 sm:w-12 sm:h-12 shadow-lg">
                   <img src="/trump_logo.jpeg" alt="Enough Logo" />
                 </div>
-                <div className="hidden sm:block">
+                <div className="sm:block">
                   <h1 className="text-xl sm:text-2xl font-black text-white tracking-tight">
                     ENOUGH!
                   </h1>
-                  <p className="text-xs text-blue-300">Opinion Polling</p>
+                  <p className="text-xs text-blue-300">Outrage, crowdsourced</p>
                 </div>
               </div>
             </div>
@@ -735,23 +768,23 @@ const UnifiedDashboard = () => {
                     <h2 className="text-3xl font-bold text-white mb-2">
                       {activeQuestion ? activeQuestion.text : "No active question"}
                       &nbsp; - &nbsp;<span className="text-gray-400 text-sm">
-                          {activeQuestion?.pubDate
-                            ? new Date(activeQuestion.pubDate).toLocaleDateString(
-                              "en-US",
-                              {
-                                month: "short",
-                                day: "numeric",
-                                year: "numeric",
-                              }
-                            )
-                            : "No date"}
-                        </span>
+                        {activeQuestion?.pubDate
+                          ? new Date(activeQuestion.pubDate).toLocaleDateString(
+                            "en-US",
+                            {
+                              month: "short",
+                              day: "numeric",
+                              year: "numeric",
+                            }
+                          )
+                          : "No date"}
+                      </span>
                     </h2>
                     <div className="flex items-center justify-between">
                       <div>
-                        
+
                         <p className="text-gray-400 mt-2">
-                          Select ALL terms that apply (multiple selections allowed)
+                          Select ALL descriptions that apply (multiple selections allowed)
                         </p>
                       </div>
 
@@ -803,14 +836,22 @@ const UnifiedDashboard = () => {
                             key={term}
                             onClick={() => toggleTerm(term)}
                             disabled={hasVoted || loading}
-                            className={`p-4 rounded-lg font-semibold text-sm transition-all ${selectedTerms.has(term)
+                            className={`
+          p-3 sm:p-4 rounded-lg font-semibold text-xs sm:text-sm transition-all
+          min-h-[60px] sm:min-h-[70px]
+          flex items-center justify-center text-center
+          leading-tight
+          ${selectedTerms.has(term)
                                 ? "bg-[#0ea4ff] text-white scale-105 shadow-lg shadow-[#0ea4ff]/50"
                                 : hasVoted || loading
                                   ? "bg-white/5 text-gray-500 cursor-not-allowed"
                                   : "bg-white/10 text-gray-300 hover:bg-white/20 hover:text-white border border-white/10"
-                              }`}
+                              }
+        `}
                           >
-                            {term}
+                            <span className="line-clamp-3 break-words w-full">
+                              {term}
+                            </span>
                           </button>
                         ))}
                       </div>
@@ -859,74 +900,74 @@ const UnifiedDashboard = () => {
 
                 {/* Export & Share Buttons */}
                 {/* Export & Share Buttons */}
-{isClient && resultsData && (
-  <div className="flex flex-wrap gap-3">
-    <button
-      onClick={exportToCSV}
-      className="flex items-center gap-2 px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition font-semibold shadow-lg"
-    >
-      <Download size={18} />
-      <span className="hidden sm:inline">CSV</span>
-    </button>
-    
-    <button
-      onClick={exportToPDF}
-      className="flex items-center gap-2 px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition font-semibold shadow-lg"
-    >
-      <Download size={18} />
-      <span className="hidden sm:inline">PDF</span>
-    </button>
-    
-    <button
-      onClick={downloadAsImage}
-      className="flex items-center gap-2 px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition font-semibold shadow-lg"
-    >
-      <Camera size={18} />
-      <span className="hidden sm:inline">Image</span>
-    </button>
+                {isClient && resultsData && (
+                  <div className="flex flex-wrap gap-3">
+                    <button
+                      onClick={exportToCSV}
+                      className="flex items-center gap-2 px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition font-semibold shadow-lg"
+                    >
+                      <Download size={18} />
+                      <span className="hidden sm:inline">CSV</span>
+                    </button>
 
-    {/* Share Button with Dropdown */}
-    <div className="relative group">
-      <button className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition font-semibold shadow-lg">
-        <Share2 size={18} />
-        <span className="hidden sm:inline">Share</span>
-      </button>
+                    <button
+                      onClick={exportToPDF}
+                      className="flex items-center gap-2 px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition font-semibold shadow-lg"
+                    >
+                      <Download size={18} />
+                      <span className="hidden sm:inline">PDF</span>
+                    </button>
 
-      {/* Mobile & Desktop Dropdown */}
-      <div className="absolute mt-2 w-48 bg-gray-800 border border-white/20 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-20 right-0 sm:right-0">
-        <button
-          onClick={() => shareToSocial('facebook')}
-          className="flex items-center gap-3 w-full px-4 py-3 hover:bg-white/10 text-white transition text-left rounded-t-lg"
-        >
-          <svg className="w-5 h-5 text-blue-500" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-          </svg>
-          Facebook
-        </button>
+                    <button
+                      onClick={downloadAsImage}
+                      className="flex items-center gap-2 px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition font-semibold shadow-lg"
+                    >
+                      <Camera size={18} />
+                      <span className="hidden sm:inline">Image</span>
+                    </button>
 
-        <button
-          onClick={() => shareToSocial('twitter')}
-          className="flex items-center gap-3 w-full px-4 py-3 hover:bg-white/10 text-white transition text-left"
-        >
-          <svg className="w-5 h-5 text-sky-400" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
-          </svg>
-          Twitter
-        </button>
+                    {/* Share Button with Dropdown */}
+                    <div className="relative group">
+                      <button className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition font-semibold shadow-lg">
+                        <Share2 size={18} />
+                        <span className="hidden sm:inline">Share</span>
+                      </button>
 
-        <button
-          onClick={() => shareToSocial('linkedin')}
-          className="flex items-center gap-3 w-full px-4 py-3 hover:bg-white/10 text-white transition text-left rounded-b-lg"
-        >
-          <svg className="w-5 h-5 text-blue-600" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-          </svg>
-          LinkedIn
-        </button>
-      </div>
-    </div>
-  </div>
-)}
+                      {/* Mobile & Desktop Dropdown */}
+                      <div className="absolute mt-2 w-48 bg-gray-800 border border-white/20 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-20 right-0 sm:right-0">
+                        <button
+                          onClick={() => shareToSocial('facebook')}
+                          className="flex items-center gap-3 w-full px-4 py-3 hover:bg-white/10 text-white transition text-left rounded-t-lg"
+                        >
+                          <svg className="w-5 h-5 text-blue-500" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+                          </svg>
+                          Facebook
+                        </button>
+
+                        <button
+                          onClick={() => shareToSocial('twitter')}
+                          className="flex items-center gap-3 w-full px-4 py-3 hover:bg-white/10 text-white transition text-left"
+                        >
+                          <svg className="w-5 h-5 text-sky-400" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z" />
+                          </svg>
+                          Twitter
+                        </button>
+
+                        <button
+                          onClick={() => shareToSocial('linkedin')}
+                          className="flex items-center gap-3 w-full px-4 py-3 hover:bg-white/10 text-white transition text-left rounded-b-lg"
+                        >
+                          <svg className="w-5 h-5 text-blue-600" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                          </svg>
+                          LinkedIn
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
 
               {/* Summary Stats - KEEP YOUR EXISTING CODE */}
@@ -1028,7 +1069,7 @@ const UnifiedDashboard = () => {
               {/* Top 5 Visual Chart - KEEP YOUR EXISTING CODE */}
               <div className="bg-white/5 border border-white/10 rounded-xl p-8">
                 <h3 className="text-2xl font-bold text-white mb-6">
-                  Top 5 Terms
+                  Top 5 Description
                 </h3>
                 <div className="space-y-6">
                   {dashboardData?.top5?.length > 0 ? (
@@ -1109,7 +1150,7 @@ const UnifiedDashboard = () => {
               {/* Remaining Terms - KEEP YOUR EXISTING CODE */}
               <div className="bg-white/5 border border-white/10 rounded-xl p-8">
                 <h3 className="text-xl font-bold text-white mb-4">
-                  All Other Terms
+                  All Other Description
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                   {resultsData?.results?.slice(2).map((item) => {
@@ -1229,7 +1270,18 @@ const UnifiedDashboard = () => {
               )}
             </div>
           )}
+          {/* Existing sections like home, vote, results, backend, admin... */}
 
+          {/* CONTACTS SECTION - Add this */}
+          {activeSection === "contacts" && (
+            <div className="space-y-6">
+              <div className="mb-6">
+                <h1 className="text-3xl font-bold text-white mb-2">Contact Management</h1>
+                <p className="text-gray-400">Manage user inquiries and messages</p>
+              </div>
+              <ContactsManagement />
+            </div>
+          )}
           {/* ADMIN SECTION */}
           {activeSection === "admin" && (
             <div className="max-w-4xl mx-auto space-y-6">
@@ -1309,10 +1361,10 @@ const UnifiedDashboard = () => {
 
               <div className="bg-white/5 border border-white/10 rounded-xl p-8">
                 <h3 className="text-xl font-bold text-white mb-4">
-                  Fixed Term List (24 terms)
+                  Fixed Term List (24 Descriptions)
                 </h3>
                 <p className="text-sm text-gray-400 mb-4">
-                  These terms are used for every question
+                  These descriptions are used for every question
                 </p>
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-2 text-sm">
                   {FIXED_TERMS.map((term) => (

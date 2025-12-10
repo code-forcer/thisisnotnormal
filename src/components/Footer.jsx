@@ -20,13 +20,13 @@ export default function Footer() {
                   ENOUGH!
                 </h1>
                 <p className="text-xs text-blue-300 sm:block">
-                  Real-Time Polling
+                  Outrage, crowdsourced
                 </p>
               </div>
             </div>
 
             <p className="text-gray-400 text-sm leading-relaxed">
-              ENOUGH! is a modern, real-time polling platform designed for
+              ENOUGH! is a modern, Outrage, crowdsourced platform designed for
               instant insights, deeper audience engagement, and beautiful data
               visualizations. Built with cutting-edge web technologies, it
               delivers responsive interactions, interactive charts, and a
@@ -49,11 +49,11 @@ export default function Footer() {
                   -About
                 </a>
               </li>
-              <li>
+              {/* <li>
                 <a href="/#features" className="hover:text-blue-400">
                   -Features
                 </a>
-              </li>
+              </li> */}
               <li>
                 <a href="/#contact" className="hover:text-blue-400">
                   -Contact
@@ -106,18 +106,7 @@ export default function Footer() {
             © {new Date().getFullYear()} <span className="text-blue-400">ENOUGH!</span>  — All rights reserved.
             <br />
             Built with{" "}
-            <FaHeart className="inline-block w-4 h-4 text-red-500 mx-1" /> by{" "}
-            <span className="text-blue-400 font-semibold">
-              <a
-                href="http://codeforcer.netlify.app"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="underline text-blue-400"
-              >
-                {" "}
-                Codeforcer
-              </a>
-            </span>
+            <FaHeart className="inline-block w-4 h-4 text-red-500 mx-1" /> for the people
           </p>
         </div>
       </div>

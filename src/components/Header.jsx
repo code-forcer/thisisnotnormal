@@ -68,7 +68,7 @@ export default function Header() {
                   ENOUGH!
                 </h1>
                 <p className="text-xs text-blue-300 sm:block">
-                  Real-Time Polling
+                  Outrage, crowdsourced
                 </p>
               </div>
             </a>
@@ -134,7 +134,7 @@ export default function Header() {
               </div>
               <div>
                 <h2 className="text-lg font-black text-white">ENOUGH!</h2>
-                <p className="text-xs text-blue-300">Real-Time Polling</p>
+                <p className="text-xs text-blue-300">Outrage, crowdsourced</p>
               </div>
             </div>
             <button

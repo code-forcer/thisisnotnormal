@@ -172,7 +172,7 @@ const LogoGenerator = () => {
                         ENOUGH!
                       </h1>
                       <p className="text-gray-300 font-semibold" style={{ fontSize: '35px' }}>
-                        REAL-TIME POLLING & LIVE RESULTS
+                        Outrage, crowdsourced & LIVE RESULTS
                       </p>
                       <p className="text-blue-400 font-medium mt-4" style={{ fontSize: '32px' }}>
                         Instant insights. Engaged audiences.
@@ -264,7 +264,7 @@ const LogoGenerator = () => {
                       </h1>
                     </div>
                     <p className="text-white font-bold mb-4" style={{ fontSize: '40px' }}>
-                      Real-Time Polling & Live Results
+                      Outrage, crowdsourced & Live Results
                     </p>
                     <p className="text-gray-400 font-semibold" style={{ fontSize: '36px' }}>
                       Instant insights. Engaged audiences.

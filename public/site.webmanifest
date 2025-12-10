@@ -1,7 +1,7 @@
 {
   "name": "LivePoll Pro",
   "short_name": "LivePoll",
-  "description": "Real-Time Polling Platform",
+  "description": "Outrage, crowdsourced Platform",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",

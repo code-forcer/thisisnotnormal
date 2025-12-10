@@ -13,7 +13,7 @@ export default function About() {
             </h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
               We're revolutionizing how people gather opinions and make
-              decisions through real-time polling technology.
+              decisions through Outrage, crowdsourced technology.
             </p>
           </div>
           <div className="grid md:grid-cols-3 gap-6">

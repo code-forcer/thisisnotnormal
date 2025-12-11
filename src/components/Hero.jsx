@@ -17,14 +17,7 @@ export default function Hero() {
         <div className="absolute inset-0 bg-black/60"></div>
 
         <div className="relative max-w-7xl mx-auto text-center">
-          {/* Small Tag */}
-          <div className="inline-block mb-4">
-            <span className="inline-flex items-center px-2 py-[2px] text-[11px] font-medium text-white rounded-full bg-blue-500/20 border border-blue-500/30 whitespace-nowrap">
-              Have you had Enough?
-            </span>
-          </div>
-
-          {/* Main Title */}
+              {/* Main Title */}
           <h1 className="text-4xl sm:text-5xl md:text-7xl font-black mb-6 bg-gradient-to-r from-blue-400 via-cyan-300 to-blue-500 bg-clip-text text-transparent leading-tight">
             Have You Had Enough!
           </h1>

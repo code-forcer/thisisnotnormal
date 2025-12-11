@@ -109,7 +109,7 @@ export default function LoginPage() {
       <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8 bg-black">
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="text-4xl sm:text-6xl font-black mb-4 bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
-            Welcome Back
+            Welcome Back Admin
           </h1>
           <p className="text-lg text-gray-300 max-w-2xl mx-auto">
             Log in to access your dashboard, create polls, and manage your

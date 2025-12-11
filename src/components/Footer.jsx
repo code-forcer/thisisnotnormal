@@ -15,7 +15,7 @@ export default function Footer() {
               <div className="flex items-center justify-center bg-gradient-to-br from-blue-500 to-blue-700 rounded-lg w-10 h-10">
                 <img src="/trump_logo.jpeg" alt="Enough Logo" />
               </div>
-             <div>
+              <div>
                 <h1 className="text-xl sm:text-2xl font-black text-white tracking-tight">
                   ENOUGH!
                 </h1>
@@ -26,12 +26,8 @@ export default function Footer() {
             </div>
 
             <p className="text-gray-400 text-sm leading-relaxed">
-              ENOUGH! is a modern, Outrage, crowdsourced platform designed for
-              instant insights, deeper audience engagement, and beautiful data
-              visualizations. Built with cutting-edge web technologies, it
-              delivers responsive interactions, interactive charts, and a
-              high-performance architecture powered by Rust,Nextjs+TailwindCss,
-              Node.js, and MongoDB.
+
+              ENOUGH! is a new outlet for the expression of Outrage. A crowdsourced platform designed for instant insights, deeper audience engagement, and easy to read and share, real-time results.
             </p>
           </div>
 

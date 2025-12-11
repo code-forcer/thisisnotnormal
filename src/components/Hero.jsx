@@ -1,11 +1,11 @@
 "use client";
-import React, { useState, useEffect } from "react";
-import { Info, Rocket } from "lucide-react";
+import React from "react";
+import { Rocket } from "lucide-react";
 import { FaRocket } from "react-icons/fa";
+
 export default function Hero() {
   return (
     <>
-      {/* Hero */}
       <section
         id="home"
         className="pt-32 pb-20 px-4 sm:px-6 lg:px-8 bg-cover bg-center bg-no-repeat relative"
@@ -13,43 +13,48 @@ export default function Hero() {
           backgroundImage: "url('/hero/1.jpg')",
         }}
       >
-        {/* Dark overlay for readability */}
+        {/* Overlay */}
         <div className="absolute inset-0 bg-black/60"></div>
 
         <div className="relative max-w-7xl mx-auto text-center">
+          {/* Small Tag */}
           <div className="inline-block mb-4">
-            <span className="inline-flex items-center px-2 py-[2px] text-[11px] font-medium text-white rounded-full bg-blue-500/15 border border-blue-500/30 whitespace-nowrap">
-              <FaRocket className="w-3.5 h-3.5 mr-1 text-yellow-400" /> Your
-              Polling Revolution Starts Here
+            <span className="inline-flex items-center px-2 py-[2px] text-[11px] font-medium text-white rounded-full bg-blue-500/20 border border-blue-500/30 whitespace-nowrap">
+              <FaRocket className="w-3.5 h-3.5 mr-1 text-cyan-300" />
+              Have you had Enough?
             </span>
           </div>
 
+          {/* Main Title */}
           <h1 className="text-4xl sm:text-5xl md:text-7xl font-black mb-6 bg-gradient-to-r from-blue-400 via-cyan-300 to-blue-500 bg-clip-text text-transparent leading-tight">
-            Create Powerful Polls
+            Here's your platform
             <br />
-            in Real-Time
+            to sound off
           </h1>
 
-          <p className="text-lg sm:text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
-            The modern polling platform built for speed, reliability, and
-            stunning visualizations. Get instant insights from your audience.
+          {/* Client exact text */}
+          <p className="text-lg sm:text-xl text-gray-300 mb-6 max-w-2xl mx-auto">
+            Here's you platform to sound off with thousands of others to voice
+            your outrage.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <p className="text-lg sm:text-xl text-gray-300 mb-6 max-w-2xl mx-auto">
+            You can submit your vote, anonymously, on over 1,000 Trump actions.
+            Not what he did this week but what he has done since the Inauguration!
+          </p>
+
+          <p className="text-lg sm:text-xl text-gray-300 mb-10 max-w-2xl mx-auto">
+            Ready to go? Let's get started.
+          </p>
+
+          {/* CTA Button */}
+          <div className="flex justify-center">
             <a
               href="/login"
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-xl font-bold text-lg shadow-2xl shadow-blue-500/50 hover:shadow-blue-500/70 transform hover:scale-105 transition-all"
+              className="inline-flex items-center justify-center gap-2 px-10 py-4 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-xl font-bold text-xl shadow-2xl shadow-blue-500/50 hover:shadow-blue-500/70 transform hover:scale-105 transition-all"
             >
               <Rocket className="w-6 h-6" />
-              Start Creating Now
-            </a>
-
-            <a
-              href="#features"
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white/10 hover:bg-white/20 rounded-xl font-bold text-lg border border-white/20 transition-all"
-            >
-              <Info className="w-6 h-6" />
-              Learn More
+              Let's Go
             </a>
           </div>
         </div>

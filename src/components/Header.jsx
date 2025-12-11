@@ -33,16 +33,7 @@ export default function Header() {
   const navItems = [
     { icon: <Home className="w-5 h-5" />, label: "Home", href: "/#home" },
     { icon: <Info className="w-5 h-5" />, label: "About", href: "/#about" },
-    // {
-    //   icon: <BarChart3 className="w-5 h-5" />,
-    //   label: "Features",
-    //   href: "/#features",
-    // },
-    // {
-    //   icon: <Users className="w-5 h-5" />,
-    //   label: "How It Works",
-    //   href: "/#how-it-works",
-    // },
+
     { icon: <Mail className="w-5 h-5" />, label: "Contact", href: "/contact" },
   ];
 
@@ -95,7 +86,7 @@ export default function Header() {
                 className="hidden sm:flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-500 rounded-lg font-bold text-sm text-white shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50 transition-all transform hover:scale-105"
               >
                 <Rocket className="w-4 h-4" />
-                <span>Get Started</span>
+                <span>Let's Go!</span>
               </a>
 
               {/* Mobile Menu Button */}
@@ -172,7 +163,7 @@ export default function Header() {
                 Ready to Start?
               </h3>
               <p className="text-sm text-gray-300 mb-4">
-                Create your first poll in minutes
+               Fill your outrages in minutes and make your voice heard!
               </p>
               <a
                 href="/login"
@@ -180,7 +171,7 @@ export default function Header() {
                 className="flex items-center justify-center gap-2 w-full px-4 py-3 bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-500 rounded-lg font-bold text-white shadow-lg shadow-blue-500/30 transition-all"
               >
                 <Rocket className="w-5 h-5" />
-                <span>Get Started Free</span>
+                <span>Lets Go!</span>
               </a>
             </div>
           </nav>

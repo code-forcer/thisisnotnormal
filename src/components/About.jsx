@@ -15,7 +15,7 @@ export default function About() {
 
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
               We're revolutionizing how people sound off, share their opinions
-              and connect. This is Outrage, Crowdsourced. Be part of it.
+              and connect as your not alone. This is Outrage, Crowdsourced. Be part of it.
             </p>
           </div>
 

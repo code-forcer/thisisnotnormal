@@ -156,7 +156,7 @@ export default function ContactPage() {
                 ready.
               </p>
               <p className="mt-2 text-blue-400 font-semibold">
-                support@This Is Not Normal.social
+                support@thisisnotnormal.social
               </p>
             </div>
 
@@ -169,7 +169,7 @@ export default function ContactPage() {
                 integrations.
               </p>
               <p className="mt-2 text-blue-400 font-semibold">
-                partners@This Is Not Normal.social
+                partners@thisisnotnormal.social
               </p>
             </div>
 
@@ -181,7 +181,7 @@ export default function ContactPage() {
                 Sponsorships, media, or enterprise solutions.
               </p>
               <p className="mt-2 text-blue-400 font-semibold">
-                business@This Is Not Normal.social
+                business@thisisnotnormal.social
               </p>
             </div>
 

@@ -252,6 +252,8 @@ const UnifiedDashboard = () => {
     }
     setSelectedTerms(newSelected);
   };
+
+
   const submitVote = async () => {
     if (selectedTerms.size === 0) return;
 
@@ -630,7 +632,7 @@ const UnifiedDashboard = () => {
     return null;
   };
   return (
-    <div className="min-h-screen bg-gray-900">
+    <div className="min-h-screen bg-gray-900 text-gray-300">
       {/* Header */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-gray-900/95 backdrop-blur-lg border-b border-white/10 shadow-lg">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -683,7 +685,7 @@ const UnifiedDashboard = () => {
                   onClick={() => setIsProfileOpen(!isProfileOpen)}
                   className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-white/10"
                 >
-                  <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+                  <div className="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center">
                     <User className="w-5 h-5 text-white" />
                   </div>
                   <ChevronDown className="w-4 h-4 text-gray-300 hidden sm:block" />
@@ -836,7 +838,7 @@ const UnifiedDashboard = () => {
                   </div>
                   <p className="text-gray-400 text-sm mb-1">Total Votes</p>
                   <p className="text-3xl font-bold text-white">
-                    {resultsData?.totalVoters || 0}
+                    {dashboardData?.stats?.totalVotes || 0}
                   </p>
                 </div>
                 <div className="bg-white/5 border border-white/10 rounded-xl p-6">
@@ -845,7 +847,7 @@ const UnifiedDashboard = () => {
                   </div>
                   <p className="text-gray-400 text-sm mb-1">Total Selections</p>
                   <p className="text-3xl font-bold text-white">
-                    {resultsData?.totalSelections || 0}
+                    {dashboardData?.stats?.totalSelections || 0}
                   </p>
                 </div>
               </div>
@@ -1114,7 +1116,7 @@ const UnifiedDashboard = () => {
               {/* Summary Stats - KEEP YOUR EXISTING CODE */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div className="bg-gradient-to-br from-blue-500/20 to-blue-600/10 border border-blue-500/30 rounded-xl p-6">
-                  <p className="text-sm text-blue-300 mb-2">Total Votes Cast</p>
+                  <p className="text-sm text-blue-300 mb-2">Total Opinions Cast</p>
                   <p className="text-4xl font-bold text-white">
                     {dashboardData?.stats?.totalSelections?.toLocaleString() ||
                       "0"}
@@ -1294,7 +1296,7 @@ const UnifiedDashboard = () => {
                   All Other Description
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                  {resultsData?.results?.slice(2).map((item) => {
+                  {resultsData?.results?.slice(5).map((item) => {
                     return (
                       <div
                         key={item.term}

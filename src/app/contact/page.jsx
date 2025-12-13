@@ -156,8 +156,7 @@ export default function ContactPage() {
                 ready.
               </p>
               <p className="mt-2 text-blue-400 font-semibold">
-                support@thisisnotnormal.social
-              </p>
+                support@thisisnotnormal.social              </p>
             </div>
 
             <div>

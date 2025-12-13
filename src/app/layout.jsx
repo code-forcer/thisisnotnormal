@@ -19,7 +19,7 @@ export const viewport = {
    Metadata
 -------------------------------- */
 export const metadata = {
-  metadataBase: new URL("http://localhost:3000"),
+  metadataBase: new URL("https://thisisnotnormal.social"),
 
   title: {
     default: "This Is Not Normal — Live Polling & Real-Time Voting Platform",
@@ -98,12 +98,12 @@ export const metadata = {
   icons: {
     icon: [
       { url: "/favicon.ico" },
-      { url: "/favicon.ico", sizes: "16x16", type: "image/png" },
-      { url: "/favicon.ico", sizes: "32x32", type: "image/png" },
+      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
     ],
     apple: [
       {
-        url: "/favicon.ico",
+        url: "/apple-touch-icon.png",
         sizes: "180x180",
         type: "image/png",
       },
@@ -117,14 +117,14 @@ export const metadata = {
     ],
   },
 
-  manifest: "/site.webmanifest",
+  manifest: "/manifest.json",
 
   category: "technology",
 };
+
 /* ------------------------------
    Root Layout
 -------------------------------- */
-
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
@@ -136,15 +136,16 @@ export default function RootLayout({ children }) {
         {/* PWA */}
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <meta name="apple-mobile-web-app-title" content="This Is Not Normal" />
+
+        {/* Explicit manifest link for better compatibility */}
+        <link rel="manifest" href="/manifest.json" />
 
         {/* SEO */}
         <link rel="canonical" href="https://thisisnotnormal.social" />
       </head>
-      <body
-        className="antialiased"
-      >
+      <body className="antialiased">
         {children}
         
         {/* Load libraries after page is interactive */}
